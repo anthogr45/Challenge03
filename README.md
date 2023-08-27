@@ -17,7 +17,7 @@ The assignment was done to build a Password Generator. The application generates
 ## Usage
 
 Home Screen layout is available in the repository path: 
-https://github.com/anthogr45/Challenge02/blob/main/assets/images/Assignment%202%20Screen.png
+https://github.com/anthogr45/Challenge02/blob/main/assets/images/Assignment%202%20Screen.png](https://github.com/anthogr45/Challenge03/blob/main/assets/Password_Gen_AnthoG.png)
 
 ## Credits
 
