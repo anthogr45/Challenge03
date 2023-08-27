@@ -31,10 +31,10 @@ function writePassword() {
 
       }else if((pwLength >= 8) && (pwLength <= 128)) {  //Password Criteria Validation
  
-        checkUpercase = confirm("Do you want uppercase letters in your password ?");
-        checkLowercase = confirm("Do you want lowercase letters in your password ?");
-        checkSpChars = confirm("Do you want special characters in your password ?");
-        checkNumbers = confirm("Do you want numbers in your password ?");
+        checkUpercase = confirm("Do you want uppercase letters in your password ?  Press > Ok < for 'YES' and Cancel for 'NO' " );
+        checkLowercase = confirm("Do you want lowercase letters in your password ?  Press > Ok < for 'YES' and Cancel for 'NO' ");
+        checkSpChars = confirm("Do you want special characters in your password ?  Press > Ok < for 'YES' and Cancel for 'NO' ");
+        checkNumbers = confirm("Do you want numbers in your password ?  Press > Ok < for 'YES' and Cancel for 'NO' ");
 
       } 
       
