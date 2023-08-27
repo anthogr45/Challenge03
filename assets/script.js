@@ -1,6 +1,7 @@
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+generateBtn.addEventListener("click", writePassword);
 
 // Write password to the #password input
 
@@ -12,36 +13,46 @@ function writePassword() {
   var checkLowercase;
   var checkSpChars;
   var checkNumbers;
-  var counter = 0;
+  var counter1 = 0;
+ 
+
+  //  passwordText.value = "";
 
  
-  alert ("Hello! The password has to be between 8  and 120 characters!");
+  alert ("Hello! The password has to be between 8 and 128 characters!");
   var pwLength = prompt("What should be the length of password ");
 
-  if ((pwLength != "" ) || (pwLength != Null)) {
-   
-      if ((pwLength < 8) || (pwLength > 120)) {
-        for (var y = 0; y < 4; ((pwLength >= 8) && (pwLength <= 120)) ) { 
-          alert ("The password has to be between above 8  and less than 120 characters!");
-          pwLength = prompt("What should be the length of password ");
-           y++
-           counter ++;
-          }
-      }else if (counter >= 4){
-        noPws(); // Type the Value for the Password to be printed
-      }
-      
-      if((pwLength >= 8) && (pwLength <= 120)) {
+  if ((pwLength != "" ) || (pwLength != Null)) { //Password given length validation
+    
+      if ((pwLength < 8) || (pwLength > 128)) {
+        alert ("The password has to be between 8 and 128 characters!")
+        counter1 = 2;
+        noPws ();
 
+      }else if((pwLength >= 8) && (pwLength <= 128)) {  //Password Criteria Validation
+ 
         checkUpercase = confirm("Do you want uppercase letters in your password ?");
         checkLowercase = confirm("Do you want lowercase letters in your password ?");
         checkSpChars = confirm("Do you want special characters in your password ?");
         checkNumbers = confirm("Do you want numbers in your password ?");
-        passwordprint();
-                
-      } else {
 
-        noPws(); // Type the Value for the Password to be printed
+      } 
+      
+      if((checkUpercase) || (checkLowercase) || (checkSpChars) || (checkNumbers)) {
+        passwordprint();
+        
+      }        
+      else {
+        noPws(); 
+      }
+
+       function noPws () {
+        if(counter1 === 2)  {
+          password = "Password length not valid."
+        }else {
+          alert("At least one password criteria is required!")
+          password = "Password conditions not given."
+        }
       }
     
    } 
@@ -49,23 +60,23 @@ function writePassword() {
  function passwordprint () {
 
     var pwUpercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var pwLowercase = pwUpercase.toLocaleLowerCase();
+    var pwLowercase = "abcdefghijklmnopqrstuvwzyz";
     var pwNumbers = "1234567890"
     var pwSpchars = "!@#$%^&*()_+=-`~<>/?;:\|][{}";
     var conPwsstring;
     var pwsString
     var ranPws;
 
-    function Password_Generator (pwsString) {
+    function Password_Generator (pwsString) { //Password is generated  based on the selected criteria. i.e pwsString contains the string for the given criterias.
       for (var i = 0; i < pwLength; i++){
-        ranPws = Math.floor(Math.random() * pwsString.length);
+        ranPws = Math.floor(Math.random() * pwsString.length); //Research online and decided to use the Math method for random selection of charactors from the string
         password += pwsString.substring(ranPws, ranPws +1);
-       
+               
       }
-      console.log(password)
+      
     }
 
-    if ((checkUpercase) && (checkLowercase) && (checkSpChars) && (checkNumbers)) {
+    if ((checkUpercase) && (checkLowercase) && (checkSpChars) && (checkNumbers)) { //Conditions for the password criteria to generate the string of given combinations (I.E. Uppercase, Lower, Numbers etc..)
 
       conPwsstring = pwUpercase.concat(pwLowercase, pwNumbers, pwSpchars);
       Password_Generator(conPwsstring);
@@ -80,21 +91,19 @@ function writePassword() {
 
       conPwsstring = pwNumbers;
       Password_Generator(conPwsstring);
-
     }else if ((!checkUpercase) && (!checkLowercase) && (!checkSpChars) && (!checkNumbers)) {
       alert("The password has to be atleast of one combination type")
       checkUpercase = confirm("Do you want uppercase letters in your password ?");
       checkLowercase = confirm("Do you want lowercase letters in your password ?");
       checkSpChars = confirm("Do you want special characters in your password ?");
       checkNumbers = confirm("Do you want numbers in your password ?");
-      noCombination();
+      
     }
 
     if ((checkUpercase) && (checkLowercase) && (!checkSpChars) && (!checkNumbers)) {
 
       conPwsstring = pwUpercase.concat(pwLowercase);
       Password_Generator(conPwsstring);
-
     }else if ((checkUpercase) && (checkLowercase) &&  (!checkSpChars) && (checkNumbers)) {
 
       conPwsstring = pwUpercase.concat(pwLowercase, pwNumbers);
@@ -115,7 +124,6 @@ function writePassword() {
 
       conPwsstring = pwSpchars.concat(pwNumbers);
       Password_Generator(conPwsstring);
-
     }else if ((checkUpercase) && (!checkLowercase) && (!checkSpChars) && (!checkNumbers)) {
 
       conPwsstring = pwUpercase;
@@ -125,9 +133,7 @@ function writePassword() {
     if ((checkUpercase) && (!checkLowercase) && (checkSpChars) && (checkNumbers)) {
 
       conPwsstring = pwUpercase.concat(pwNumbers, pwSpchars);
-
       Password_Generator(conPwsstring);
-
     }else if ((checkUpercase) && (!checkLowercase) && (!checkSpChars) && (checkNumbers)) {
 
       conPwsstring = pwUpercase.concat(pwNumbers);
@@ -137,47 +143,44 @@ function writePassword() {
     if ((checkUpercase) && (!checkLowercase) && (!checkSpChars) && (checkNumbers)) {
 
       conPwsstring = pwUpercase.concat(pwNumbers);
-
       Password_Generator(conPwsstring);
+    }else if ((!checkUpercase) && (checkLowercase) && (!checkSpChars) && (checkNumbers)) {
+      conPwsstring = pwLowercase.concat(pwNumbers);
+      Password_Generator(conPwsstring);
+     }
 
+     if ((!checkUpercase) && (checkLowercase) && (!checkSpChars) && (!checkNumbers)) {
+
+      conPwsstring = pwLowercase;
+      Password_Generator(conPwsstring);
+    }else if ((!checkUpercase) && (!checkLowercase) && (checkSpChars) && (!checkNumbers)) {
+
+      conPwsstring = pwSpchars;
+      Password_Generator(conPwsstring);
+     }
+    if ((checkUpercase) && (!checkLowercase) && (checkSpChars) && (!checkNumbers)) {
+
+      conPwsstring = pwUpercase.concat(pwSpchars);
+      Password_Generator(conPwsstring);
     }else if ((checkUpercase) && (checkLowercase) && (!checkSpChars) && (!checkNumbers)) {
-
       conPwsstring = pwUpercase.concat(pwLowercase);
       Password_Generator(conPwsstring);
     }
+    if ((!checkUpercase) && (!checkLowercase) && (!checkSpChars) && (checkNumbers)) {
+
+      conPwsstring = pwNumbers;
+      Password_Generator(conPwsstring);
+    }else if ((!checkUpercase) && (!checkLowercase) && (!checkSpChars) && (!checkNumbers)) {
+      noPws ();
+    }
+
   }
 
-   function noCombination () {
-    console.log ("No data inputed");
-    passwordprint();
-   }
-
-
-    var password = passwordprint;
     var passwordText = document.querySelector("#password");
   
     passwordText.value = password;
 
     return; 
-
-  
   }
-
-
-    // var password = passwordprint;
-    // var passwordText = document.querySelector("#password");
   
-    // passwordText.value = password;
-  
-  
-  
-   
-  
-  
-  
-  
-  
-  
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+// generateBtn.addEventListener("click", writePassword);
